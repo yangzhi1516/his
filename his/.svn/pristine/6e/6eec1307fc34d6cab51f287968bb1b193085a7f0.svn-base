@@ -1,0 +1,55 @@
+package com.his.entity;
+
+import java.math.BigDecimal;
+
+public class Prescription {
+    private Integer prescriptionDrugId;
+
+    private Integer prescriptionDrugnum;
+
+    private BigDecimal prescriptionTotalprice;
+
+    private Integer prescriptionPatientId;
+
+    private Integer prescriptionState;
+
+    public Integer getPrescriptionDrugId() {
+        return prescriptionDrugId;
+    }
+
+    public void setPrescriptionDrugId(Integer prescriptionDrugId) {
+        this.prescriptionDrugId = prescriptionDrugId;
+    }
+
+    public Integer getPrescriptionDrugnum() {
+        return prescriptionDrugnum;
+    }
+
+    public void setPrescriptionDrugnum(Integer prescriptionDrugnum) {
+        this.prescriptionDrugnum = prescriptionDrugnum;
+    }
+
+    public BigDecimal getPrescriptionTotalprice() {
+        return prescriptionTotalprice;
+    }
+
+    public void setPrescriptionTotalprice(BigDecimal prescriptionTotalprice) {
+        this.prescriptionTotalprice = prescriptionTotalprice;
+    }
+
+    public Integer getPrescriptionPatientId() {
+        return prescriptionPatientId;
+    }
+
+    public void setPrescriptionPatientId(Integer prescriptionPatientId) {
+        this.prescriptionPatientId = prescriptionPatientId;
+    }
+
+    public Integer getPrescriptionState() {
+        return prescriptionState;
+    }
+
+    public void setPrescriptionState(Integer prescriptionState) {
+        this.prescriptionState = prescriptionState;
+    }
+}

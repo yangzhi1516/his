@@ -1,0 +1,98 @@
+package com.his.controller;
+
+import java.util.List;
+import java.util.UUID;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.alibaba.fastjson.JSONObject;
+import com.his.entity.Patient;
+import com.his.entity.Prescription;
+import com.his.service.PatientService;
+import com.his.service.PrescriptionService;
+import com.his.utils.ResponseResult;
+
+@Controller
+@RequestMapping("/api")
+public class PrescriptionController {
+	@Autowired
+	private PrescriptionService prescriptionService;
+	@Autowired
+	private PatientService patientService;
+	public void setPrescriptionService(PrescriptionService prescriptionService) {
+		this.prescriptionService = prescriptionService;
+	}
+	
+	public void setPatientService(PatientService patientService) {
+		this.patientService = patientService;
+	}
+
+	@RequestMapping("/addPrescription")
+	@ResponseBody
+	public ResponseResult addPrescription(@RequestBody String prescription) {
+		JSONObject obj =JSONObject.parseObject(prescription);
+		List<Prescription> list = JSONObject.parseArray(obj.toJSONString(), Prescription.class);
+		Integer count=0;
+		Prescription prescription2=null;
+		prescription2.setPrescriptionCode(UUID.randomUUID().toString());
+		for (Prescription pres : list) {
+			prescription2.setPrescriptionDrugId(pres.getPrescriptionDrugId());
+			prescription2.setPrescriptionDrugnum(pres.getPrescriptionDrugnum());
+			prescription2.setPrescriptionPatientId(pres.getPrescriptionPatientId());
+			//执行添加药方
+			count = prescriptionService.addPrescription(prescription2);
+		}	
+		if (count>0) {
+			Patient patient = new Patient();
+			patient.setPatientPrescriptionCode(prescription2.getPrescriptionCode());
+			//修改病人信息中的要取药方信息
+			int count2 = patientService.updatePatientById(patient);
+			if (count2>0) {
+				return new ResponseResult("true","添加成功");
+			}else {
+				return new ResponseResult("false","病人信息修改失败");
+			}
+		}else {
+			return new ResponseResult("false","添加失败");
+		}
+	}
+	
+	@RequestMapping("/findAllPrescription")
+	@ResponseBody
+	public Object findAllPrescription(Model model) {
+		JSONObject obj = new JSONObject();
+		//查询所有药方信息
+		List<Prescription> prescriptionlist =prescriptionService.findAllPrescription();
+		if(prescriptionlist.size()!=0) {
+			model.addAttribute("findAllPrescriptionList", prescriptionlist);
+			obj.put("list", prescriptionlist);
+			obj.put("result", new ResponseResult("true","查询成功"));
+		}else {
+			obj.put("list", null);
+			obj.put("result", new ResponseResult("false","查询失败"));
+		}
+		return obj;
+	}
+	
+	@RequestMapping("/findPrescriptionByCode")
+	@ResponseBody
+	public Object findPrescriptionByCode(Model model,String prescriptionCode) {
+		JSONObject obj = new JSONObject();
+		//调用方法，查询指定药方编号的药方信息
+		List<Prescription> prescriptionlist=prescriptionService.findPrescriptionByCode(prescriptionCode);
+		if (prescriptionlist.size()!=0) {
+			model.addAttribute("findPrescriptionByCodeList", prescriptionlist);
+			obj.put("list", prescriptionlist);
+			obj.put("result", new ResponseResult("true","查询成功"));
+		}else {
+			obj.put("list", null);
+			obj.put("result", new ResponseResult("false","查询失败"));
+		}
+		return obj;
+	}
+}

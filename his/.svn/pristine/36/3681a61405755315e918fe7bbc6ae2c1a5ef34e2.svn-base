@@ -1,0 +1,169 @@
+package com.his.controller;
+
+import java.math.BigDecimal;
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.alibaba.fastjson.JSONObject;
+import com.his.entity.Hospitalization;
+import com.his.entity.Patient;
+import com.his.entity.Prescription;
+import com.his.entity.Staff;
+import com.his.service.HospitalizationService;
+import com.his.service.PrescriptionService;
+import com.his.utils.ResponseResult;
+
+@Controller
+@RequestMapping("/api")
+public class HospitalizationController {
+
+	@Autowired
+	private HospitalizationService hospitalizationService;
+	@Autowired
+	private PrescriptionService prescriptionService;
+	
+	@RequestMapping("/updateHospitalization")
+	@ResponseBody
+	public ResponseResult updateHospitalization(Hospitalization hospitalization,HttpSession session) {
+		
+		System.out.println(hospitalization);
+		BigDecimal totalprice = new BigDecimal(0);
+		//得到住院医生的对象
+		Staff staff = (Staff) session.getAttribute("staff");
+		//得到住院医生的诊疗费
+		BigDecimal bigDecimal = new BigDecimal(staff.getStaffCost());
+		//计算总天数的费用
+		BigDecimal bigDecimal2 = new BigDecimal(hospitalization.getHospitalizationDays()*200);
+		//计算总费用（总天数的费用+住院医生的诊疗费）
+		totalprice = totalprice.add(bigDecimal2).add(bigDecimal);
+		
+		//添加修改住院表的内容
+		hospitalization.setHospitalizationCost(totalprice);
+		hospitalization.setHospitalizationRest(totalprice);
+		hospitalization.setHospitalizationStaffId(staff.getStaffId());
+		int count = hospitalizationService.updateHospitalization(hospitalization);
+		if(count>0) {
+			return new ResponseResult("true", "修改成功");
+		}else {
+			return new ResponseResult("false", "修改失败");
+		}
+	}
+	@RequestMapping("/findAll")
+	@ResponseBody
+	public Object findAll(HttpSession session) {
+		Patient patient = (Patient) session.getAttribute("patient");
+		JSONObject obj = new JSONObject();
+		List<Hospitalization> listh = hospitalizationService.findAll(patient.getPatientId());
+		obj.put("listh", listh);
+		return obj;
+	}
+	
+	@RequestMapping("/patientUpdateHospitalization")
+	@ResponseBody
+	public ResponseResult patientUpdateHospitalization(BigDecimal paypay,Hospitalization hospitalization,HttpSession session) {
+		System.out.println(paypay);
+		System.out.println(hospitalization);
+		Patient patient = (Patient) session.getAttribute("patient");
+		Integer hospitalId = 0;
+		//查询该病人的所有住院信息
+		List<Hospitalization> listh = hospitalizationService.findAll(patient.getPatientId());
+		for (Hospitalization hospitalization2 : listh) {
+			hospitalId = hospitalization2.getHospitalizationId();
+			//判断病人住院信息是否为出院（0代表未出院）
+			if(hospitalization2.getHospitalizationState()==0) {
+				//总的住院费
+				BigDecimal hospitalizationCost = hospitalization2.getHospitalizationCost();
+				//未缴纳的住院费
+				BigDecimal hospitalizationRest = new BigDecimal(0);
+				if(hospitalization.getHospitalizationRest()!=new BigDecimal(0)) {
+					hospitalizationRest = hospitalization.getHospitalizationRest();
+				}
+				
+				//已缴纳的住院费
+				BigDecimal hospitalizationPay = new BigDecimal(0).add(paypay);
+				if(hospitalization.getHospitalizationPay()!=new BigDecimal(0)) {
+					hospitalizationPay=hospitalization.getHospitalizationPay();
+				}
+				//未缴纳的住院费=总住院费-已缴纳费用
+				hospitalizationRest = hospitalizationCost.subtract(hospitalizationPay);
+				//未缴纳的住院费大于0，添加到住院信息
+				if(hospitalizationRest.doubleValue()>0) {
+					hospitalization.setHospitalizationRest(hospitalizationRest);
+					hospitalization.setHospitalizationCostState(0);
+				}
+				//未缴纳的住院费等于0，是否缴清住院费改为1（1代表已缴清）
+				if(hospitalizationRest.doubleValue()==0) {
+					hospitalization.setHospitalizationCostState(1);
+				}
+			}
+		}
+		hospitalization.setHospitalizationId(hospitalId);
+		int count = hospitalizationService.patientUpdateHospitalization(hospitalization);
+		if(count>0) {
+			return new ResponseResult("true", "修改成功");
+		}else {
+			return new ResponseResult("false", "修改失败");
+		}
+	}
+
+	@RequestMapping("/findHospitalization")
+	@ResponseBody
+	public Object findHospitalization() {
+		JSONObject obj = new JSONObject();
+		//查询所有未出院的病人
+		List<Hospitalization> listh = hospitalizationService.findHospitalization();
+		System.out.println(listh.size());
+		if(listh.size()>0) {
+			obj.put("list", listh);
+			obj.put("result",new ResponseResult("true","查询成功"));
+		}else {
+			obj.put("list", null);
+			obj.put("result",new ResponseResult("false","查询失败"));
+		}
+		return obj;
+	}
+	
+	@RequestMapping("/staffUpdateHospitalization")
+	@ResponseBody
+	public ResponseResult staffUpdateHospitalization(Integer patientId) {
+		//住院医生修改病人是否出院
+		int count = hospitalizationService.staffUpdateHospitalization(patientId);
+		if(count>0) {
+			return new ResponseResult("true","修改成功");
+		}else {
+			return new ResponseResult("false","修改失败");
+		}
+	}
+	
+	public void setHospitalizationService(HospitalizationService hospitalizationService) {
+		this.hospitalizationService = hospitalizationService;
+	}
+	public void setPrescriptionService(PrescriptionService prescriptionService) {
+		this.prescriptionService = prescriptionService;
+	}
+	
+	@RequestMapping("/findApplyHospitalization")
+	@ResponseBody
+	public Object findApplyHospitalization() {
+		JSONObject obj = new JSONObject();
+		//调用方法，查询所有申请住院的病人
+		List<Hospitalization> list = hospitalizationService.findApplyHospitalization();
+		if (list.size()!=0) {
+			obj.put("list", list);
+			obj.put("result", new ResponseResult("true","查询成功"));
+		}else {
+			obj.put("list", null);
+			obj.put("result", new ResponseResult("false","查询失败"));
+		}
+		
+		return obj;
+	}
+	
+}

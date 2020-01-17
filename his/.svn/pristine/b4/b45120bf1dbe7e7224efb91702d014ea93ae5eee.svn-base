@@ -1,0 +1,45 @@
+package com.his.entity;
+
+import java.util.Date;
+
+public class Hospital {
+    private Integer hospitalId;
+
+    private String hostpitalTelephone;
+
+    private Date hostpitalCreatedate;
+
+    private String hostpitalInformation;
+
+    public Integer getHospitalId() {
+        return hospitalId;
+    }
+
+    public void setHospitalId(Integer hospitalId) {
+        this.hospitalId = hospitalId;
+    }
+
+    public String getHostpitalTelephone() {
+        return hostpitalTelephone;
+    }
+
+    public void setHostpitalTelephone(String hostpitalTelephone) {
+        this.hostpitalTelephone = hostpitalTelephone == null ? null : hostpitalTelephone.trim();
+    }
+
+    public Date getHostpitalCreatedate() {
+        return hostpitalCreatedate;
+    }
+
+    public void setHostpitalCreatedate(Date hostpitalCreatedate) {
+        this.hostpitalCreatedate = hostpitalCreatedate;
+    }
+
+    public String getHostpitalInformation() {
+        return hostpitalInformation;
+    }
+
+    public void setHostpitalInformation(String hostpitalInformation) {
+        this.hostpitalInformation = hostpitalInformation == null ? null : hostpitalInformation.trim();
+    }
+}

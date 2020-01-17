@@ -1,0 +1,42 @@
+package com.his.controller;
+
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import com.his.entity.Department;
+import com.his.entity.Staff;
+import com.his.service.DepartmentService;
+import com.his.utils.ResponseResult;
+
+@Controller
+@RequestMapping("/api")
+public class DepartmentController {
+	@Autowired
+	private DepartmentService departmentService;
+
+	public void setDepartmentService(DepartmentService departmentService) {
+		this.departmentService = departmentService;
+	}
+	
+	@RequestMapping("/findAllDepartment")
+	@ResponseBody
+	public ResponseResult findAllDepartment(Model model) {
+		//查询所有科室信息
+		List<Department> departmentlist = departmentService.findAllDepartment();
+		model.addAttribute("departmentlist", departmentlist);
+		return new ResponseResult("true", "查询成功", departmentlist);
+	}
+	
+	public ResponseResult findDepartmentById(int id,HttpSession session,Model model) {
+		//调用方法，查询指定id的科室信息
+		Department department = departmentService.findDepartmentById(id);
+		model.addAttribute("departmentById", department);
+		return new ResponseResult("true","查询成功",department);
+	}
+}

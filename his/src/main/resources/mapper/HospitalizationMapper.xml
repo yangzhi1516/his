@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.his.dao.IHospitalizationDao">
+	<!-- 门诊医生根据病人id创建住院信息表 -->
+	<insert id="addHospitalization" parameterType="Hospitalization">
+		INSERT INTO hospitalization(hospitalization_patient_id,hospitalization_reason) 
+		VALUES(#{patientId},#{hospitalizationReason})
+	</insert>
+	
+	<!-- 住院医生修改病人的住院信息 -->
+	<update id="updateHospitalization" parameterType="Hospitalization">
+		UPDATE hospitalization 
+		SET hospitalization_days=#{hospitalizationDays},
+			hospitalization_staff_id=#{hospitalizationStaffId},
+			hospitalization_cost=#{hospitalizationCost},
+			hospitalization_rest=#{hospitalizationRest},
+			hospitalization_room_id=#{hospitalizationRoomId},
+			hospitalization_indate=now(),
+			hospitalization_state=0
+		WHERE hospitalization_id=#{hospitalizationId}
+	</update>
+	
+	<!-- 病人已缴纳的住院费用，修改住院信息 -->
+	<update id="patientUpdateHospitalization" parameterType="Hospitalization">
+		UPDATE hospitalization 
+		SET hospitalization_pay=#{hospitalizationPay},
+			hospitalization_rest=#{hospitalizationRest},
+			hospitalization_cost_state=#{hospitalizationCostState}
+		WHERE hospitalization_id=#{hospitalizationId}
+	</update>
+	
+	<!-- 根据病人id查询所有的住院信息 -->
+	<select id="findAll" resultType="Hospitalization" parameterType="int">
+		SELECT * FROM hospitalization 
+		WHERE hospitalization_patient_id=#{patientId} 
+		and hospitalization_state=0
+	</select>
+	
+	
+	<resultMap type="Hospitalization" id="hoszatMap" autoMapping="true">
+		<id column="hospitalization_id" property="hospitalizationId"/>
+		<association property="room" javaType="Room" autoMapping="true">
+			<id column="room_id" property="roomId"/>
+		</association>
+		<association property="staff" javaType="Staff" autoMapping="true">
+			<id column="staff_id" property="staffId"/>
+		</association>
+		<association property="patient" javaType="Patient" autoMapping="true">
+			<id column="patient_id" property="patientId"/>
+		</association>
+	</resultMap>
+	<!-- 查询所有未出院的病人 -->
+	<select id="findHospitalization" resultMap="hoszatMap">
+		SELECT * FROM hospitalization h
+		LEFT JOIN patient p
+		ON h.hospitalization_patient_id=p.patient_id
+		LEFT JOIN staff s
+		ON h.hospitalization_staff_id=s.staff_id
+		LEFT JOIN room r
+		ON h.hospitalization_room_id=r.room_id
+		WHERE h.hospitalization_state=0
+	</select>
+	
+	<!-- 住院医生修改病人是否出院 -->
+	<update id="staffUpdateHospitalization" parameterType="Hospitalization">
+		UPDATE hospitalization SET hospitalization_state=1,hospitalization_exitdate=NOW()
+		WHERE hospitalization_patient_id=#{patientId}
+			AND hospitalization_state=0 
+			AND hospitalization_cost_state=1
+	</update>
+	
+	<!-- 查询所有申请住院的病人 -->
+	<select id="findApplyHospitalization" resultMap="findApplyHospitalizationMap">
+		SELECT * FROM hospitalization h
+		LEFT JOIN patient p
+		ON h.hospitalization_patient_id=p.patient_id
+		WHERE h.hospitalization_state is null
+	</select>
+	
+	<resultMap type="Hospitalization" id="findApplyHospitalizationMap" autoMapping="true">
+	<id column="hospitalization_id" property="hospitalizationId"/>
+	<association property="patient" javaType="Patient" autoMapping="true">
+		<id column="patient_id" property="patientId"/>
+	</association>
+	</resultMap>
+</mapper>

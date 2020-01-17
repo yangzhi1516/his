@@ -1,0 +1,16 @@
+package com.his.dao;
+
+import java.util.List;
+
+import com.his.entity.Department;
+import com.his.entity.Registration;
+
+public interface IRegistrationDao {
+	
+	/**
+	 * 根据挂号编号查询挂号信息
+	 * @param id
+	 * @return
+	 */
+	List<Registration> findRegistrationById(Integer id);
+}

@@ -1,0 +1,50 @@
+package com.his.entity;
+
+import java.io.Serializable;
+import java.util.Date;
+
+public class Attendance implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private Integer attendanceId;	//考勤编号
+
+    private Date attendanceCreatedate;	//签到日期
+
+    private Integer attendanceStaffId;	//签到职员编号
+
+    private Integer attendanceDays;		//签到天数
+
+    public Integer getAttendanceId() {
+        return attendanceId;
+    }
+
+    public void setAttendanceId(Integer attendanceId) {
+        this.attendanceId = attendanceId;
+    }
+
+    public Date getAttendanceCreatedate() {
+        return attendanceCreatedate;
+    }
+
+    public void setAttendanceCreatedate(Date attendanceCreatedate) {
+        this.attendanceCreatedate = attendanceCreatedate;
+    }
+
+    public Integer getAttendanceStaffId() {
+        return attendanceStaffId;
+    }
+
+    public void setAttendanceStaffId(Integer attendanceStaffId) {
+        this.attendanceStaffId = attendanceStaffId;
+    }
+
+    public Integer getAttendanceDays() {
+        return attendanceDays;
+    }
+
+    public void setAttendanceDays(Integer attendanceDays) {
+        this.attendanceDays = attendanceDays;
+    }
+}

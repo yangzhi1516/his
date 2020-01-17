@@ -1,0 +1,73 @@
+package com.his.service.impl;
+
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.his.dao.IPatientDao;
+import com.his.entity.Hospitalization;
+import com.his.entity.Patient;
+import com.his.service.PatientService;
+
+@Service("patientService")
+public class PatientServiceImpl implements PatientService{
+
+	@Autowired
+	private IPatientDao iPatientDao;
+	//查找所有病人信息
+	@Override
+	public List<Patient> findAllPatient() {
+		// TODO Auto-generated method stub
+		return iPatientDao.findAllPatient();
+	}
+	public void setiPatientDao(IPatientDao iPatientDao) {
+		this.iPatientDao = iPatientDao;
+	}
+	//注册
+	@Override
+	public int register(Patient patient) {
+		// TODO Auto-generated method stub
+		return iPatientDao.register(patient);
+	}
+	
+	//登录
+	@Override
+	public Patient login(Patient patient) {
+		// TODO Auto-generated method stub
+		return iPatientDao.login(patient);
+	}
+	//根据病人id查看病人信息
+	@Override
+	public Patient findPatientById(Integer id) {
+		// TODO Auto-generated method stub
+		return iPatientDao.findPatientById(id);
+	}
+	@Override
+	public List<Patient> findPatientByHoszatstate(Patient patient) {
+		// TODO Auto-generated method stub
+		return iPatientDao.findPatientByHoszatstate(patient);
+	}
+	
+	//按id修改病人信息
+	@Override
+	public int updatePatientById(Patient patient) {
+		// TODO Auto-generated method stub
+		return iPatientDao.updatePatientById(patient);
+	}
+	@Override
+	public int updatePatientInAdviceid(Map<String, Integer> updatepMap) {
+		// TODO Auto-generated method stub
+		return iPatientDao.updatePatientInAdviceid(updatepMap);
+	}
+	
+	//病人申请住院
+	@Override
+	public int addHospitalization(Hospitalization hospitalization) {
+		// TODO Auto-generated method stub
+		return iPatientDao.addHospitalization(hospitalization);
+	}
+
+
+}

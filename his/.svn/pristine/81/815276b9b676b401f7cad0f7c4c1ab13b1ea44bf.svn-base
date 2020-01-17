@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.his.dao.IWorkDao">
+	<!-- 根据医生的编号修改工作表 -->
+	<update id="updateWorkById" parameterType="Work">
+		UPDATE WORK SET work_num=work_num+1,work_income=#{workIncome} ,work_createdate=NOW()
+		WHERE work_staff_id=#{workStaffId}
+	</update>
+	
+	<!-- 查看指定id医生的当日的工作表 -->
+	<select id="findTodayWorkById" parameterType="int" resultType="Work">
+		SELECT * FROM WORK 
+		WHERE work_staff_id=#{workStaffId} AND work_createdate 
+		BETWEEN DATE_FORMAT(CURDATE(),'%Y-%m-%d %H:%i:%s') AND NOW()
+	</select>
+	
+		<!-- 添加工作表 -->
+	<insert id="addWork" parameterType="Work">
+		INSERT INTO WORK(work_num,work_staff_id,work_income) 
+		VALUES(1,#{workStaffId},#{workIncome})
+	</insert>
+	
+	<!-- 查询医生所有的工作表 -->
+	<select id="findWorkById" parameterType="int" resultType="Work">
+		SELECT * FROM WORK WHERE work_staff_id=#{workStaffId}
+	</select>
+	
+</mapper>

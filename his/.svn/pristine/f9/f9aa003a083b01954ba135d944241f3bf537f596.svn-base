@@ -1,0 +1,13 @@
+package com.his.dao;
+
+import com.his.entity.Staff;
+
+public interface IStaffDao {
+
+	/**
+	 * 员工登录
+	 * @param staff
+	 * @return
+	 */
+	Staff staffLogin(Staff staff);
+}

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.his.dao.IPatientDao">
+
+	<select id="findAllPatient" resultType="Patient">
+		SELECT * FROM patient
+	</select>
+	
+	<insert id="register" parameterType="Patient">
+		INSERT INTO patient(patient_code,patient_password,patient_name,patient_sex,
+			patient_age,patient_telephone,patient_identitycard) 
+		VALUES(#{patientCode},#{patientPassword},#{patientName},#{patientSex},#{patientAge},
+			#{patientTelephone},#{patientIdentitycard})
+	</insert>
+
+	<select id="login" parameterType="Patient" resultType="Patient">
+		select *
+		from patient
+		where patient_code=#{patientCode} and patient_password=#{patientPassword}
+	</select>
+	
+	<select id="findPatientById" resultType="Patient" parameterType="int">
+		SELECT * FROM patient WHERE patient_id=#{id}
+	</select>
+
+</mapper>

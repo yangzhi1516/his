@@ -1,0 +1,85 @@
+package com.his.entity;
+
+import java.util.Date;
+
+public class Advice {
+    private Integer adviceId;
+
+    private Date adviceCreatedate;
+
+    private Integer advicePatientId;
+
+    private Integer adviceStaffId;
+
+    private Integer adviceNurseId;
+
+    private Integer adviceState;
+
+    private Date adviceModifydate;
+
+    private String adviceInformation;
+
+    public Integer getAdviceId() {
+        return adviceId;
+    }
+
+    public void setAdviceId(Integer adviceId) {
+        this.adviceId = adviceId;
+    }
+
+    public Date getAdviceCreatedate() {
+        return adviceCreatedate;
+    }
+
+    public void setAdviceCreatedate(Date adviceCreatedate) {
+        this.adviceCreatedate = adviceCreatedate;
+    }
+
+    public Integer getAdvicePatientId() {
+        return advicePatientId;
+    }
+
+    public void setAdvicePatientId(Integer advicePatientId) {
+        this.advicePatientId = advicePatientId;
+    }
+
+    public Integer getAdviceStaffId() {
+        return adviceStaffId;
+    }
+
+    public void setAdviceStaffId(Integer adviceStaffId) {
+        this.adviceStaffId = adviceStaffId;
+    }
+
+    public Integer getAdviceNurseId() {
+        return adviceNurseId;
+    }
+
+    public void setAdviceNurseId(Integer adviceNurseId) {
+        this.adviceNurseId = adviceNurseId;
+    }
+
+    public Integer getAdviceState() {
+        return adviceState;
+    }
+
+    public void setAdviceState(Integer adviceState) {
+        this.adviceState = adviceState;
+    }
+
+    public Date getAdviceModifydate() {
+        return adviceModifydate;
+    }
+
+    public void setAdviceModifydate(Date adviceModifydate) {
+        this.adviceModifydate = adviceModifydate;
+    }
+
+    public String getAdviceInformation() {
+        return adviceInformation;
+    }
+
+    public void setAdviceInformation(String adviceInformation) {
+        this.adviceInformation = adviceInformation == null ? null : adviceInformation.trim();
+    }
+}

@@ -1,0 +1,24 @@
+package com.his.service.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.his.dao.ISalaryDao;
+import com.his.entity.Salary;
+import com.his.service.SalaryService;
+
+@Service("salaryService")
+public class SalaryServiceImpl implements SalaryService {
+
+	@Autowired
+	private ISalaryDao iSalaryDao;
+	@Override
+	public int addSalary(Salary salary) {
+		// TODO Auto-generated method stub
+		return iSalaryDao.addSalary(salary);
+	}
+	public void setiSalaryDao(ISalaryDao iSalaryDao) {
+		this.iSalaryDao = iSalaryDao;
+	}
+
+}

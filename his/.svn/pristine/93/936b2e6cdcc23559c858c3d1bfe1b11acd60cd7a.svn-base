@@ -1,0 +1,13 @@
+package com.his.service;
+
+import java.util.List;
+
+import com.his.entity.Income;
+
+public interface IncomeService {
+	/**
+	 * 查询所有收入
+	 * @return
+	 */
+	List<Income> checkIncome();
+}

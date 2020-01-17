@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.his.dao.IStaffDao">
+
+	<select id="staffLogin" parameterType="Staff" resultType="Staff">
+		SELECT * FROM staff WHERE staff_code=#{staffCode} AND staff_password=#{staffPassword}
+	</select>
+	<!-- 根据员工id查询员工信息 -->
+	<select id="findStaffById" parameterType="int" resultType="Staff">
+		SELECT * FROM staff WHERE staff_id=#{staffId}
+	</select>
+	<!-- 根据员工id修改员工信息 -->
+	<update id="updateStaffById" parameterType="Staff">
+		UPDATE staff SET staff_days=#{staffDays} WHERE staff_id=#{staffId}
+	</update>
+	
+	<!-- 添加员工信息 -->
+	<insert id="addStaff" parameterType="Staff">
+		INSERT INTO staff(staff_code,staff_password,staff_name,staff_sex,staff_age,
+			staff_telephone,staff_department_id,staff_role_id,staff_level_id
+		<if test="staffRoleId==1">
+			,staff_cost
+		</if>)
+		VALUES(#{staffCode},#{staffPassword},#{staffName},#{staffSex},#{staffAge},
+			#{staffTelephone},#{staffDepartmentId},#{staffRoleId},#{staffLevelId}
+		<if test="staffRoleId==1">
+			,#{staffCost}
+		</if>)
+		<selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="staffId">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	<!-- 添加员工的薪水 -->
+	<update id="updateStaff" parameterType="Staff">
+		UPDATE staff SET staff_salary_id=#{staffSalaryId} WHERE staff_id=#{staffId}
+	</update>
+	
+	<!-- 查找所有员工当日工作情况 -->
+	<select id="findStaffWork" resultMap="findStaffWorkMap">
+		SELECT *
+		FROM staff s LEFT JOIN WORK w
+		ON s.staff_id=w.work_staff_id
+		AND work_createdate
+		BETWEEN DATE_FORMAT(CURDATE(),'%Y-%m-%d %H:%i:%s') 
+		AND NOW()
+	</select>
+	
+	<resultMap type="Staff" id="findStaffWorkMap" autoMapping="true">
+		<id column="staff_id" property="staffId"/>
+		<association property="work" javaType="Work">
+			<id column="work_id" property="workId"/>
+		</association>
+	</resultMap>
+</mapper>

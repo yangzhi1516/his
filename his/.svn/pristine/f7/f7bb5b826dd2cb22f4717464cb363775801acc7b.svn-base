@@ -1,0 +1,19 @@
+package com.his.service.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.his.dao.IAttendanceDao;
+import com.his.service.AttendanceService;
+
+@Service("attendanceService")
+public class AttendanceServiceImpl implements AttendanceService{
+	
+	@Autowired
+	private IAttendanceDao iAttendanceDao;
+	@Override
+	public int staffSignin(int id,int day) {
+		return iAttendanceDao.staffSignin(id,day);
+	}
+
+}

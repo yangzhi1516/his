@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.his.dao.IRegistrationDao">
+	<resultMap type="Registration" id="regMap" autoMapping="true">
+		<id column="registration_id" property="registrationId"/>
+		
+		<association property="staff" javaType="Staff" autoMapping="true">
+			<id column="registration_staff_id" property="registrationStaffId"/>
+		</association>
+		<association property="department" javaType="Department" autoMapping="true">
+			<id column="registration_department_id" property="registrationDepartmentId"/>
+		</association>
+		<association property="patient" javaType="Patient" autoMapping="true">
+			<id column="registration_patient_id" property="registrationPatientId"/>
+		</association>
+	</resultMap>
+	<!-- 根据挂号编号查询挂号信息 -->
+	<select id="findRegistrationById" resultMap="regMap" parameterType="int">
+		SELECT r.registration_id,p.patient_name,d.department_name,s.staff_name,
+			r.registration_createdate,r.registration_state,d.department_cost
+		FROM registration r 
+			LEFT JOIN department d ON r.registration_department_id=d.department_id
+			LEFT JOIN patient p ON r.registration_patient_id=p.patient_id
+			LEFT JOIN staff s ON r.registration_staff_id=s.staff_id
+		WHERE r.registration_id=#{id}
+	</select>
+	
+	<!-- 添加挂号单 -->
+	<insert id="addRegistration" parameterType="Registration">
+		INSERT INTO registration(registration_patient_id,registration_department_id,registration_cost) 
+		VALUES(#{registrationPatientId},#{registrationDepartmentId},#{registrationCost})
+	</insert>
+	
+	<!-- 医生修改挂号单状态 -->
+	<update id="updateRegistration" parameterType="map">
+		UPDATE registration 
+		SET registration_staff_id=#{staffId},registration_state=1 
+		WHERE registration_id=#{regId}
+	</update>
+	
+	<!-- 病人退号 -->
+	<update id="updateReg" parameterType="int">
+		UPDATE registration 
+		SET registration_state=2
+		WHERE registration_id=#{regId}
+	</update>
+</mapper>

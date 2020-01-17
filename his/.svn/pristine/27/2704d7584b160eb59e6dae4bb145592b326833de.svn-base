@@ -1,0 +1,38 @@
+package com.his.controller;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.his.entity.Staff;
+import com.his.service.StaffService;
+import com.his.utils.ResponseResult;
+
+@Controller
+@RequestMapping("/api")
+public class StaffController {
+
+	@Autowired
+	private StaffService staffService;
+	
+	@RequestMapping("/staffLogin")
+	@ResponseBody
+	public ResponseResult staffLogin(@RequestBody Staff staff,HttpSession session) {
+		//调用登录方法，查询
+		Staff staff2 = staffService.staffLogin(staff);
+		//判断是否存在该对象
+		if(staff2!=null) {
+			//如果有，将员工信息保存在session里
+			session.setAttribute("staff", staff2); 
+			return new ResponseResult("true","登录成功",staff2);
+		}else {
+			return new ResponseResult("false","用户不存在");
+		}
+		
+	}
+	
+}

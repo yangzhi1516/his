@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.his.dao.IStaffDao">
+
+	<select id="staffLogin" parameterType="Staff" resultType="Staff">
+		SELECT * FROM staff WHERE staff_code=#{staffCode} AND staff_password=#{staffPassword}
+	</select>
+	<!-- 根据员工id查询员工信息 -->
+	<select id="findStaffById" parameterType="int" resultType="">
+		SELECT * FROM staff WHERE staff_id=#{staffId}
+	</select>
+	<!-- 根据员工id修改员工信息 -->
+	<update id="updateStaffById" parameterType="Staff">
+		UPDATE staff SET staff_days=#{staffDays} WHERE staff_id=#{staffId}
+	</update>
+</mapper>

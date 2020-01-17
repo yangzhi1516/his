@@ -1,0 +1,13 @@
+package com.his.dao;
+
+import com.his.entity.Nursing;
+
+public interface INursingDao {
+
+	/**
+	 * 添加护士护理的信息
+	 * @param nursing
+	 * @return
+	 */
+	int addNursing(Nursing nursing);
+}

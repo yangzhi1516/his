@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.his.dao.IDrugDao">
+	<!-- 查询所有药物信息 -->
+	<select id="findAllDrug" resultMap="findAllDrugMap">
+		SELECT *
+		FROM drug d LEFT JOIN
+		manufacturer m
+		ON d.drug_manufacturer_id=m.manufacturer_id
+	</select>
+	<resultMap type="Drug" id="findAllDrugMap" autoMapping="true">
+		<id column="drug_id" property="drugId" />
+		<association property="manufacturer"
+			javaType="Manufacturer" autoMapping="true">
+			<id column="manufacturer_id" property="manufacturerId" />
+		</association>
+	</resultMap>
+
+	<!-- 查询指定id的药物信息 -->
+	<select id="findDrugById" resultMap="findDrugByIdMap">
+		SELECT *
+		FROM drug d LEFT
+		JOIN manufacturer m
+		ON d.drug_manufacturer_id=m.manufacturer_id
+		WHERE
+		drug_id=#{drugId}
+	</select>
+	<resultMap type="Drug" id="findDrugByIdMap"
+		autoMapping="true">
+		<id column="drug_id" property="drugId" />
+		<association property="manufacturer"
+			javaType="Manufacturer" autoMapping="true">
+			<id column="manufacturer_id" property="manufacturerId" />
+		</association>
+	</resultMap>
+	<!-- 根据药物id修改数量 -->
+	<update id="updateDrugNumberById" parameterType="int">
+		UPDATE drug SET drug_number = #{drugNumber} WHERE drug_id = #{drugId} 
+	</update>
+	<!-- 根据id删除药物信息 -->
+	<delete id="deleteDrugById" parameterType="int">
+		DELETE FROM drug WHERE drug_id =#{drugId}
+	</delete>
+	
+</mapper>

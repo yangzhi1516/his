@@ -1,0 +1,9 @@
+package com.his.dao;
+
+public interface IAttendanceDao {
+	/**
+	 * 	员工签到
+	 * @return
+	 */
+	int staffSignin(int id,int day);
+}

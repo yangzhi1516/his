@@ -1,0 +1,13 @@
+package com.his.dao;
+
+import com.his.entity.Queue;
+
+public interface IQueueDao {
+
+	/**
+	 * 添加挂号队列信息
+	 * @param queue
+	 * @return
+	 */
+	int addQueue(Queue queue);
+}

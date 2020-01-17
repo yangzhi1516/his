@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.his.dao.IAttendanceDao">
+	<!-- 员工签到-->
+	<insert id="staffSignin" parameterType="int">
+		INSERT INTO
+		attendance(attendance_staff_id,attendance_days)
+		VALUES(#{attendanceStaffId},#{attendanceDays})
+	</insert>
+
+	<resultMap type="Staff" id="checkAttendanceMap" autoMapping="true">
+		<id column="staff_id" property="staffId"/>
+		<association property="attendance" javaType="Attendance" autoMapping="true">
+			<id column="attendance_id" property="attendanceId"/>
+		</association>
+	</resultMap>
+	<!-- 院长查看员工签到情况 -->
+	<select id="checkAttendance" resultMap="checkAttendanceMap">
+		SELECT *
+		FROM staff s LEFT JOIN attendance a
+		ON s.staff_id = a.attendance_staff_id
+		AND a.attendance_createdate 
+		BETWEEN DATE_FORMAT(CURDATE(),'%Y-%m-%d %H:%i:%s') 
+		AND NOW()
+	</select>
+
+</mapper>

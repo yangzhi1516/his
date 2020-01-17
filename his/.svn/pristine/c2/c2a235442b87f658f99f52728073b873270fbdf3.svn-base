@@ -1,0 +1,37 @@
+package com.his.entity;
+/**
+ * 挂号队列表
+ * @author 荣泽尚
+ *
+ */
+public class Queue {
+    private Integer queueId;//挂号队列编号
+
+    private Integer queueRregistrationId;//当前就诊的挂号
+
+    private Integer queueDepartmentId;//科室编号
+
+    public Integer getQueueId() {
+        return queueId;
+    }
+
+    public void setQueueId(Integer queueId) {
+        this.queueId = queueId;
+    }
+
+    public Integer getQueueRregistrationId() {
+		return queueRregistrationId;
+	}
+
+	public void setQueueRregistrationId(Integer queueRregistrationId) {
+		this.queueRregistrationId = queueRregistrationId;
+	}
+
+    public Integer getQueueDepartmentId() {
+        return queueDepartmentId;
+    }
+
+    public void setQueueDepartmentId(Integer queueDepartmentId) {
+        this.queueDepartmentId = queueDepartmentId;
+    }
+}

@@ -1,0 +1,13 @@
+package com.his.dao;
+
+import com.his.entity.Advice;
+
+public interface IAdviceDao {
+
+	/**
+	 * 添加医嘱
+	 * @param advice
+	 * @return
+	 */
+	int addAdvice(Advice advice);
+}

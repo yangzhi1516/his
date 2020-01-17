@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.his.dao.ISalaryDao">
+		<!-- 添加薪资 -->
+	<insert id="addSalary" parameterType="Salary">
+		INSERT INTO salary(salary_staff_id,salary_pay,salary_month) 
+		VALUES(#{salaryStaffId},#{salaryMonth},#{salaryMonth})
+		<selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="salaryId">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	<!-- 修改工资情况 -->
+	<update id="updateSalary" parameterType="int">
+		UPDATE salary SET salary_pay=(salary_month/(SELECT DAY(CURRENT_DATE)))*
+		(SELECT staff_days FROM staff WHERE staff_id=#{staffId}) 
+		WHERE salary_staff_id=#{staffId}
+	</update>
+	
+	<!-- 查看工资表 -->
+	<select id="findSalaryById" parameterType="int" resultType="Salary">
+		SELECT * FROM salary WHERE salary_staff_id=#{salaryStaffId}
+	</select>
+	
+	
+	
+	
+	
+</mapper>

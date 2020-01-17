@@ -1,0 +1,28 @@
+package com.his.service.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.his.dao.IDepartmentDao;
+import com.his.entity.Department;
+import com.his.service.DepartmentService;
+
+@Service("departmentService")
+public class DepartmentServiceImpl implements DepartmentService {
+	
+	@Autowired
+	private IDepartmentDao idepartmentDao;
+	@Override
+	public List<Department> findAllDepartment() {
+		// TODO Auto-generated method stub
+		return idepartmentDao.findAllDepartment();
+	}
+	@Override
+	public Department findDepartmentById(int id) {
+		// TODO Auto-generated method stub
+		return idepartmentDao.findDepartmentById(id);
+	}
+
+}

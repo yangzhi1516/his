@@ -1,0 +1,35 @@
+package com.his.service.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.his.dao.IPatientDao;
+import com.his.entity.Patient;
+import com.his.service.PatientService;
+
+@Service("patientService")
+public class PatientServiceImpl implements PatientService{
+
+	@Autowired
+	private IPatientDao iPatientDao;
+	//查找所有病人信息
+	@Override
+	public List<Patient> findAllPatient() {
+		// TODO Auto-generated method stub
+		return iPatientDao.findAllPatient();
+	}
+	public void setiPatientDao(IPatientDao iPatientDao) {
+		this.iPatientDao = iPatientDao;
+	}
+	//注册
+	@Override
+	public int register(Patient patient) {
+		// TODO Auto-generated method stub
+		return iPatientDao.register(patient);
+	}
+
+	
+
+}

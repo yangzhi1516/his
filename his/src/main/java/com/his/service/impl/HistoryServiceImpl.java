@@ -1,0 +1,32 @@
+package com.his.service.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.his.dao.IHistoryDao;
+import com.his.entity.History;
+import com.his.service.HistoryService;
+@Service("historyService")
+public class HistoryServiceImpl implements HistoryService {
+	@Autowired
+	private IHistoryDao iHistoryDao;
+	
+	public void setiHistoryDao(IHistoryDao iHistoryDao) {
+		this.iHistoryDao = iHistoryDao;
+	}
+
+	@Override
+	public Integer addHistory(History history) {
+		// TODO Auto-generated method stub
+		return iHistoryDao.addHistory(history);
+	}
+
+	@Override
+	public List<History> findHistoryByPatientId(Integer id) {
+		// TODO Auto-generated method stub
+		return iHistoryDao.findHistoryByPatientId(id);
+	}
+
+}

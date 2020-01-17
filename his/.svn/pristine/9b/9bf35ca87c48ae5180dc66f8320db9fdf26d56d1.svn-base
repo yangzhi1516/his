@@ -1,0 +1,38 @@
+package com.his.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.his.entity.Patient;
+import com.his.service.PatientService;
+
+@Controller
+@RequestMapping("/api")
+public class PatientController {
+
+	@Autowired
+	private PatientService patientService;
+	@RequestMapping("/find")
+	@ResponseBody
+	public Object findAllPatient() {
+		List<Patient> listp = patientService.findAllPatient();
+		for (Patient patient : listp) {
+			System.out.println(patient.getPatientCode()+"\t"+patient.getPatientName());
+		}
+		return listp;
+	}
+	@RequestMapping("register")
+	@ResponseBody
+	public String register(Patient patient) {
+		int count = patientService.register(patient);
+		if(count>0) {
+			return "hello-------";
+		}
+		return "hello";
+	}
+	
+}

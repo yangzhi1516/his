@@ -1,0 +1,21 @@
+package com.his.dao;
+
+import java.util.List;
+
+import com.his.entity.Patient;
+
+public interface IPatientDao {
+
+	/**
+	 * 查找所有病人信息
+	 * @return
+	 */
+	List<Patient> findAllPatient();
+	
+	/**
+	 * 注册
+	 * @param patient
+	 * @return
+	 */
+	int register(Patient patient);
+}

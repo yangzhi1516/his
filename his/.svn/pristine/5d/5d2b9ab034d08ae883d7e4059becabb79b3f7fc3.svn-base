@@ -1,0 +1,13 @@
+package com.his.service;
+
+import com.his.entity.Staff;
+
+public interface StaffService {
+
+	/**
+	 * 员工登录
+	 * @param staff
+	 * @return
+	 */
+	Staff staffLogin(Staff staff);
+}

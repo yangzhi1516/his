@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.his.dao.IDrugDao">
+	<!-- 查询所有药物信息 -->
+	<select id="findAllDrug" resultMap="findAllDrugMap">
+		SELECT *
+		FROM drug d LEFT JOIN
+		manufacturer m
+		ON d.drug_manufacturer_id=m.manufacturer_id
+	</select>
+	<resultMap type="Drug" id="findAllDrugMap" autoMapping="true">
+		<id column="drugId" property="drugId" />
+		<association property="manufacturer"
+			javaType="Manufacturer" autoMapping="true">
+			<id column="manufacturerId" property="manufacturerId" />
+		</association>
+	</resultMap>
+
+	<!-- 查询指定id的药物信息 -->
+	<select id="findDrugById" resultMap="findDrugByIdMap">
+		SELECT *
+		FROM drug d LEFT
+		JOIN manufacturer m
+		ON d.drug_manufacturer_id=m.manufacturer_id
+		WHERE
+		drug_id=#{drugId}
+	</select>
+	<resultMap type="Drug" id="findDrugByIdMap"
+		autoMapping="true">
+		<id column="drugId" property="drugId" />
+		<association property="manufacturer"
+			javaType="Manufacturer" autoMapping="true">
+			<id column="manufacturerId" property="manufacturerId" />
+		</association>
+	</resultMap>
+
+</mapper>

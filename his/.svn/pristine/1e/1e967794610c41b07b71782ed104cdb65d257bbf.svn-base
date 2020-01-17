@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.his.dao.IIncomeDao">
+	<!-- 查询周一到周日的工作收入 -->
+	<select id="checkIncome" resultType="Income">
+		SELECT *
+		FROM income
+		WHERE income_createdate
+		between (select
+		subdate(curdate(),date_format(curdate(),'%w')-1))
+		and (select
+		subdate(curdate(),date_format(curdate(),'%w')-7));
+	</select>
+
+	<!-- 添加当日工作收入 -->
+	<insert id="addIncome" parameterType="Income">
+		INSERT INTO income SET
+		income_registration=(
+		SELECT SUM(registration_cost)
+		FROM registration
+		WHERE registration_createdate
+		BETWEEN DATE_FORMAT(CURDATE(),'%Y-%m-%d %H:%i:%s')
+		AND NOW()),income_hospitalization=(
+		SELECT SUM(hospitalization_cost)
+		FROM hospitalization
+		WHERE hospitalization_indate
+		BETWEEN DATE_FORMAT(CURDATE(),'%Y-%m-%d %H:%i:%s')
+		AND NOW()),income_work=(
+		SELECT SUM(work_income)
+		FROM WORK
+		WHERE work_createdate
+		BETWEEN DATE_FORMAT(CURDATE(),'%Y-%m-%d %H:%i:%s')
+		AND NOW()),income_total=income_registration+income_work+
+		income_hospitalization
+	</insert>
+</mapper>

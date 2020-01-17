@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.his.dao.IHistoryDao">
+	<!-- 医生添加病史 -->
+	<insert id="addHistory" parameterType="History">
+		INSERT INTO history(history_information,history_patient_id,history_staff_id) 
+		VALUES(#{historyInformation},#{historyPatientId},#{historyStaffId}) 
+	</insert>
+	<!-- 其他医生查看病人病史 -->
+	<select id="findHistoryByPatientId" parameterType="int" resultMap="findHistoryByPatientIdMap">
+		SELECT H.*,s.staff_name,p.patient_name 
+		FROM history h LEFT JOIN staff s
+		ON h.history_staff_id=s.staff_id
+		LEFT JOIN patient p
+		ON h.history_patient_id=p.patient_id
+		WHERE history_patient_id=#{historyPatientId}
+	</select>
+	
+	<resultMap type="History" id="findHistoryByPatientIdMap">
+		<id column="history_id" property="historyId"/>
+		<result column="history_information" property="historyInformation"/>
+		<result column="history_patient_id" property="historyPatientId"/>
+		<result column="history_staff_id" property="historyStaffId"/>
+		<result column="history_createdate" property="historyCreatedate"/>
+		<association property="staff" javaType="Staff">
+			<id column="staff_id" property="staffId"/>
+			<result column="staff_name" property="staffName"/>
+		</association>
+		<association property="patient" javaType="Patient">
+			<id column="patient_id" property="patientId"/>
+		</association>
+	</resultMap>
+</mapper>

@@ -1,0 +1,33 @@
+package com.his.entity;
+
+public class Manufacturer {
+    private Integer manufacturerId;
+
+    private String manufacturerName;
+
+    private String manufacturerTelephone;
+
+    public Integer getManufacturerId() {
+        return manufacturerId;
+    }
+
+    public void setManufacturerId(Integer manufacturerId) {
+        this.manufacturerId = manufacturerId;
+    }
+
+    public String getManufacturerName() {
+        return manufacturerName;
+    }
+
+    public void setManufacturerName(String manufacturerName) {
+        this.manufacturerName = manufacturerName == null ? null : manufacturerName.trim();
+    }
+
+    public String getManufacturerTelephone() {
+        return manufacturerTelephone;
+    }
+
+    public void setManufacturerTelephone(String manufacturerTelephone) {
+        this.manufacturerTelephone = manufacturerTelephone == null ? null : manufacturerTelephone.trim();
+    }
+}

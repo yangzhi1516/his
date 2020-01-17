@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.his.dao.IQueueDao">
+	<!-- 添加挂号队列信息 -->
+	<insert id="addQueue" parameterType="Queue">
+		INSERT INTO queue(queue_registration_id,queue_department_id)
+		VALUES(#{queueRregistrationId},#{queueDepartmentId})
+	</insert>
+	<!-- 查询挂号队列中有多少条数据 -->
+	<select id="findQueueCount" resultType="int">
+		SELECT COUNT(queue_id) FROM queue 
+	</select>
+	
+	<delete id="delQueue" parameterType="int">
+		DELETE FROM queue WHERE queue_registration_id=#{regId}
+	</delete>
+
+</mapper>

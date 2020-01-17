@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.his.dao.IAdviceDao">
+	<!-- 添加医嘱 -->
+	<insert id="addAdvice" parameterType="Advice">
+		INSERT INTO
+		advice(advice_information,advice_patient_id,advice_staff_id)
+		VALUES(#{adviceInformation},#{advicePatientId},#{adviceStaffId})
+		<selectKey resultType="java.lang.Integer" order="AFTER"
+			keyProperty="adviceId">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+
+	<!-- 护士执行医嘱 -->
+	<update id="updateAdviceByNursStaff" parameterType="Advice">
+		UPDATE advice
+		SET
+		advice_nurse_id=#{adviceNurseId},advice_state=1,advice_modifydate=NOW()
+		WHERE advice_id=#{adviceId}
+	</update>
+
+	<!-- 查询所有未执行医嘱的病人 -->
+	<select id="findAdviceByState" resultMap="findAdviceByStateMap">
+		SELECT
+		*
+		FROM advice a
+		LEFT JOIN
+		patient p ON
+		a.advice_patient_id=p.patient_id
+	
+	</select>
+
+	<resultMap type="Advice" id="findAdviceByStateMap" autoMapping="true">
+		<id column="advice_id" property="adviceId"/>
+		<association property="patient" javaType="Patient">
+			<id column="patient_id" property="patientId"/>
+		</association>
+	</resultMap>
+	
+</mapper>

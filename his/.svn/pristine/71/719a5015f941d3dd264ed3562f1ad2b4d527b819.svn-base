@@ -1,0 +1,9 @@
+package com.his.service;
+
+public interface AttendanceService {
+	/**
+	 * 	员工签到
+	 * @return
+	 */
+	int staffSignin(int id,int day);
+}

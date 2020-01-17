@@ -1,0 +1,123 @@
+package com.his.entity;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Date;
+/**
+ * 住院信息表
+ * @author 荣泽尚
+ *
+ */
+public class Hospitalization implements Serializable{
+	private static final long serialVersionUID = 1L;
+
+	private Integer hospitalizationId;	//入院编号
+
+    private Integer hospitalizationDays;	//住院天数
+
+    private Integer hospitalizationPatientId;	//住院病人编号
+
+    private Integer hospitalizationStaffId;	//治疗病人的住院医生编号
+
+    private BigDecimal hospitalizationCost;	//总的住院费用
+
+    private BigDecimal hospitalizationPay;	//已缴纳费用
+
+    private BigDecimal hospitalizationRest;	//仍未缴纳的费用
+
+    private String hospitalizationCostState;	//是否缴纳所有住院费
+
+    private Integer hospitalizationState;	//是否出院
+
+    private Date hospitalizationExitdate;	//出院时间
+
+    private Integer hospitalizationRoomId;	//病人所在房间
+
+    public Integer getHospitalizationId() {
+        return hospitalizationId;
+    }
+
+    public void setHospitalizationId(Integer hospitalizationId) {
+        this.hospitalizationId = hospitalizationId;
+    }
+
+    public Integer getHospitalizationDays() {
+        return hospitalizationDays;
+    }
+
+    public void setHospitalizationDays(Integer hospitalizationDays) {
+        this.hospitalizationDays = hospitalizationDays;
+    }
+
+    public Integer getHospitalizationPatientId() {
+        return hospitalizationPatientId;
+    }
+
+    public void setHospitalizationPatientId(Integer hospitalizationPatientId) {
+        this.hospitalizationPatientId = hospitalizationPatientId;
+    }
+
+    public Integer getHospitalizationStaffId() {
+        return hospitalizationStaffId;
+    }
+
+    public void setHospitalizationStaffId(Integer hospitalizationStaffId) {
+        this.hospitalizationStaffId = hospitalizationStaffId;
+    }
+
+    public BigDecimal getHospitalizationCost() {
+        return hospitalizationCost;
+    }
+
+    public void setHospitalizationCost(BigDecimal hospitalizationCost) {
+        this.hospitalizationCost = hospitalizationCost;
+    }
+
+    public BigDecimal getHospitalizationPay() {
+        return hospitalizationPay;
+    }
+
+    public void setHospitalizationPay(BigDecimal hospitalizationPay) {
+        this.hospitalizationPay = hospitalizationPay;
+    }
+
+    public BigDecimal getHospitalizationRest() {
+        return hospitalizationRest;
+    }
+
+    public void setHospitalizationRest(BigDecimal hospitalizationRest) {
+        this.hospitalizationRest = hospitalizationRest;
+    }
+
+    public String getHospitalizationCostState() {
+        return hospitalizationCostState;
+    }
+
+    public void setHospitalizationCostState(String hospitalizationCostState) {
+        this.hospitalizationCostState = hospitalizationCostState == null ? null : hospitalizationCostState.trim();
+    }
+
+    public Integer getHospitalizationState() {
+        return hospitalizationState;
+    }
+
+    public void setHospitalizationState(Integer hospitalizationState) {
+        this.hospitalizationState = hospitalizationState;
+    }
+
+    public Date getHospitalizationExitdate() {
+        return hospitalizationExitdate;
+    }
+
+    public void setHospitalizationExitdate(Date hospitalizationExitdate) {
+        this.hospitalizationExitdate = hospitalizationExitdate;
+    }
+
+    public Integer getHospitalizationRoomId() {
+        return hospitalizationRoomId;
+    }
+
+    public void setHospitalizationRoomId(Integer hospitalizationRoomId) {
+        this.hospitalizationRoomId = hospitalizationRoomId;
+    }
+}

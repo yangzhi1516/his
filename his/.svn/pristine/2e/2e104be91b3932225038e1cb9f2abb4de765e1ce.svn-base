@@ -1,0 +1,20 @@
+package com.his.dao;
+
+import com.his.entity.Hospitalization;
+
+public interface IHospitalizationDao {
+
+	/**
+	 * 门诊医生根据病人id创建住院信息表
+	 * @param patientId
+	 * @return
+	 */
+	int addHospitalization(Integer patientId);
+	
+	/**
+	 * 住院医生修改病人的住院信息
+	 * @param hospitalization
+	 * @return
+	 */
+	int updateHospitalization(Hospitalization hospitalization);
+}

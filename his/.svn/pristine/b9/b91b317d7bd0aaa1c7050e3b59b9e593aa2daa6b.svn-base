@@ -1,0 +1,45 @@
+package com.his.entity;
+
+import java.util.Date;
+
+public class Nursing {
+    private Integer nursingId;
+
+    private String nursingInformation;
+
+    private Integer nursingPatientId;
+
+    private Date nursingCreatedate;
+
+    public Integer getNursingId() {
+        return nursingId;
+    }
+
+    public void setNursingId(Integer nursingId) {
+        this.nursingId = nursingId;
+    }
+
+    public String getNursingInformation() {
+        return nursingInformation;
+    }
+
+    public void setNursingInformation(String nursingInformation) {
+        this.nursingInformation = nursingInformation == null ? null : nursingInformation.trim();
+    }
+
+    public Integer getNursingPatientId() {
+        return nursingPatientId;
+    }
+
+    public void setNursingPatientId(Integer nursingPatientId) {
+        this.nursingPatientId = nursingPatientId;
+    }
+
+    public Date getNursingCreatedate() {
+        return nursingCreatedate;
+    }
+
+    public void setNursingCreatedate(Date nursingCreatedate) {
+        this.nursingCreatedate = nursingCreatedate;
+    }
+}

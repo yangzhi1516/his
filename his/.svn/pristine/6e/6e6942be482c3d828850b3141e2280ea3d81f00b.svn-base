@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.his.dao.IQueueDao">
+	<!-- 添加挂号队列信息 -->
+	<insert id="addQueue" parameterType="Queue">
+		INSERT INTO queue(queue_registration_id,queue_department_id)
+		VALUES(#{queueRregistrationId},#{queueDepartmentId})
+	</insert>
+	<!-- 查询挂号队列中有多少条数据 -->
+	<select id="findQueueCount" resultType="int">
+		SELECT COUNT(queue_id) FROM queue 
+	</select>
+	
+	<!-- 根据挂号单编号删除挂号队列 -->
+	<delete id="delQueue" parameterType="int">
+		DELETE FROM queue WHERE queue_registration_id=#{regId}
+	</delete>
+	
+	<resultMap type="Queue" id="queueMap" autoMapping="true">
+		<id column="queue_id" property="queueId"/>	
+		<association property="department" javaType="Department" autoMapping="true">
+			<id column="department_id" property="departmentId"/>
+		</association>	
+		<collection property="listr" ofType="Registration" autoMapping="true">
+			<id column="registration_id" property="registrationId"/>
+			<association property="patient" javaType="Patient" autoMapping="true">
+				<id column="patient_id" property="patientId"/>
+			</association>
+		</collection>
+	</resultMap>
+	<!-- 根据科室编号查询所有挂号单 -->
+	<select id="findAllByDepId" resultMap="queueMap" parameterType="int">
+		SELECT * FROM queue q
+		LEFT JOIN registration r 
+		ON q.queue_registration_id=r.registration_id
+		LEFT JOIN patient p
+		ON r.registration_patient_id=p.patient_id
+		LEFT JOIN department d
+		ON q.queue_department_id=d.department_id
+		WHERE queue_department_id=#{depId}
+	</select>
+
+</mapper>

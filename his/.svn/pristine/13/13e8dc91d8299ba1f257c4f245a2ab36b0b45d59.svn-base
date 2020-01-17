@@ -1,0 +1,19 @@
+package com.his.service;
+
+import java.util.List;
+
+import com.his.entity.Staff;
+
+public interface AttendanceService {
+	/**
+	 * 	员工签到
+	 * @return
+	 */
+	int staffSignin(int id,int day);
+	
+	/**
+	 *  院长查看员工签到情况
+	 * @return
+	 */
+	List<Staff> checkAttendance();
+}

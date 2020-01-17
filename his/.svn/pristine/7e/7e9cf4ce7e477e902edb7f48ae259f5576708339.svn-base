@@ -1,0 +1,45 @@
+package com.his.entity;
+
+import java.math.BigDecimal;
+
+public class Salary {
+    private Integer salaryId;
+
+    private Integer salaryStaffId;
+
+    private BigDecimal salaryPay;
+
+    private BigDecimal salaryMonth;
+
+    public Integer getSalaryId() {
+        return salaryId;
+    }
+
+    public void setSalaryId(Integer salaryId) {
+        this.salaryId = salaryId;
+    }
+
+    public Integer getSalaryStaffId() {
+        return salaryStaffId;
+    }
+
+    public void setSalaryStaffId(Integer salaryStaffId) {
+        this.salaryStaffId = salaryStaffId;
+    }
+
+    public BigDecimal getSalaryPay() {
+        return salaryPay;
+    }
+
+    public void setSalaryPay(BigDecimal salaryPay) {
+        this.salaryPay = salaryPay;
+    }
+
+    public BigDecimal getSalaryMonth() {
+        return salaryMonth;
+    }
+
+    public void setSalaryMonth(BigDecimal salaryMonth) {
+        this.salaryMonth = salaryMonth;
+    }
+}

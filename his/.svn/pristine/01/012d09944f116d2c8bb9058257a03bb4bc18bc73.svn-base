@@ -1,0 +1,13 @@
+package com.his.dao;
+
+import com.his.entity.Salary;
+
+public interface ISalaryDao {
+
+	/**
+	 * 添加薪资
+	 * @param salary
+	 * @return
+	 */
+	int addSalary(Salary salary);
+}

@@ -1,0 +1,14 @@
+package com.his.service;
+
+import java.util.List;
+
+import com.his.entity.Drug;
+
+public interface DrugService {
+
+	/**
+	 *  查找所有药物信息
+	 * @return
+	 */
+	List<Drug> findAllDrug();
+}

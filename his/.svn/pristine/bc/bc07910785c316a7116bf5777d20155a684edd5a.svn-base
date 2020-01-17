@@ -1,0 +1,65 @@
+package com.his.controller;
+
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.his.entity.Patient;
+import com.his.service.PatientService;
+
+@Controller
+@RequestMapping("/api")
+public class PatientController {
+
+	@Autowired
+	private PatientService patientService;
+	@RequestMapping("/find")
+	@ResponseBody
+	public Object findAllPatient() {
+		List<Patient> listp = patientService.findAllPatient();
+		for (Patient patient : listp) {
+			System.out.println(patient.getPatientCode()+"\t"+patient.getPatientName());
+		}
+		return listp;
+	}
+	@RequestMapping("register")
+	@ResponseBody
+	public String register(Patient patient) {
+		List<Patient> listp = patientService.findAllPatient();
+		for (Patient patient2 : listp) {
+			if(patient2.getPatientCode()==patient.getPatientCode()) {
+				return "false";
+			}
+		}
+		int count = patientService.register(patient);
+		if(count>0) {
+			return "true";
+		}else {
+			return "false";
+		}
+		
+	}
+	
+	@RequestMapping("login")
+	@ResponseBody
+	public String login(@RequestBody Patient patient,Model model,HttpSession session) {
+	
+		Patient patient1 = patientService.login(patient);
+		if(patient1!=null) {
+			session.setAttribute("patient", patient1);
+			model.addAttribute("patient", patient);
+			return "ture";
+		}else {
+			return "false";
+		}
+		
+	}
+	
+}

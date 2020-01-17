@@ -1,0 +1,53 @@
+package com.his.entity;
+
+public class Queue {
+    private Integer queueId;
+
+    private Integer queueCurrentrg;
+
+    private Integer queueNextrg;
+
+    private Integer queueWaitnum;
+
+    private Integer queueDepartmentId;
+
+    public Integer getQueueId() {
+        return queueId;
+    }
+
+    public void setQueueId(Integer queueId) {
+        this.queueId = queueId;
+    }
+
+    public Integer getQueueCurrentrg() {
+        return queueCurrentrg;
+    }
+
+    public void setQueueCurrentrg(Integer queueCurrentrg) {
+        this.queueCurrentrg = queueCurrentrg;
+    }
+
+    public Integer getQueueNextrg() {
+        return queueNextrg;
+    }
+
+    public void setQueueNextrg(Integer queueNextrg) {
+        this.queueNextrg = queueNextrg;
+    }
+
+    public Integer getQueueWaitnum() {
+        return queueWaitnum;
+    }
+
+    public void setQueueWaitnum(Integer queueWaitnum) {
+        this.queueWaitnum = queueWaitnum;
+    }
+
+    public Integer getQueueDepartmentId() {
+        return queueDepartmentId;
+    }
+
+    public void setQueueDepartmentId(Integer queueDepartmentId) {
+        this.queueDepartmentId = queueDepartmentId;
+    }
+}

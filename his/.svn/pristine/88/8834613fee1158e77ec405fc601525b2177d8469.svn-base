@@ -1,0 +1,57 @@
+package com.his.service.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.his.dao.IHospitalizationDao;
+import com.his.entity.Hospitalization;
+import com.his.service.HospitalizationService;
+
+@Service("hospitalizationService")
+public class HospitalizationServiceImpl implements HospitalizationService {
+
+	@Autowired
+	private IHospitalizationDao iHospitalizationDao;
+	@Override
+	public int addHospitalization(Integer patientId) {
+		// TODO Auto-generated method stub
+		return iHospitalizationDao.addHospitalization(patientId);
+	}
+
+	@Override
+	public int updateHospitalization(Hospitalization hospitalization) {
+		// TODO Auto-generated method stub
+		return iHospitalizationDao.updateHospitalization(hospitalization);
+	}
+
+	@Override
+	public int patientUpdateHospitalization(Hospitalization hospitalization) {
+		// TODO Auto-generated method stub
+		return iHospitalizationDao.patientUpdateHospitalization(hospitalization);
+	}
+
+	@Override
+	public List<Hospitalization> findAll(Integer patientId) {
+		// TODO Auto-generated method stub
+		return iHospitalizationDao.findAll(patientId);
+	}
+
+	@Override
+	public List<Hospitalization> findHospitalization() {
+		// TODO Auto-generated method stub
+		return iHospitalizationDao.findHospitalization();
+	}
+
+	@Override
+	public int staffUpdateHospitalization(Integer patientId) {
+		// TODO Auto-generated method stub
+		return iHospitalizationDao.staffUpdateHospitalization(patientId);
+	}
+
+	public void setiHospitalizationDao(IHospitalizationDao iHospitalizationDao) {
+		this.iHospitalizationDao = iHospitalizationDao;
+	}
+
+}

@@ -1,0 +1,86 @@
+package com.his.entity;
+
+import java.math.BigDecimal;
+import java.util.Date;
+
+public class Drug {
+    private Integer drugId;
+
+    private String drugName;
+
+    private Integer drugNumber;
+
+    private BigDecimal drugPrice;
+
+    private Integer drugManufacturerId;
+
+    private Date drugModifydate;
+
+    private Date drugCreatedate;
+
+    private String drugDescription;
+
+    public Integer getDrugId() {
+        return drugId;
+    }
+
+    public void setDrugId(Integer drugId) {
+        this.drugId = drugId;
+    }
+
+    public String getDrugName() {
+        return drugName;
+    }
+
+    public void setDrugName(String drugName) {
+        this.drugName = drugName == null ? null : drugName.trim();
+    }
+
+    public Integer getDrugNumber() {
+        return drugNumber;
+    }
+
+    public void setDrugNumber(Integer drugNumber) {
+        this.drugNumber = drugNumber;
+    }
+
+    public BigDecimal getDrugPrice() {
+        return drugPrice;
+    }
+
+    public void setDrugPrice(BigDecimal drugPrice) {
+        this.drugPrice = drugPrice;
+    }
+
+    public Integer getDrugManufacturerId() {
+        return drugManufacturerId;
+    }
+
+    public void setDrugManufacturerId(Integer drugManufacturerId) {
+        this.drugManufacturerId = drugManufacturerId;
+    }
+
+    public Date getDrugModifydate() {
+        return drugModifydate;
+    }
+
+    public void setDrugModifydate(Date drugModifydate) {
+        this.drugModifydate = drugModifydate;
+    }
+
+    public Date getDrugCreatedate() {
+        return drugCreatedate;
+    }
+
+    public void setDrugCreatedate(Date drugCreatedate) {
+        this.drugCreatedate = drugCreatedate;
+    }
+
+    public String getDrugDescription() {
+        return drugDescription;
+    }
+
+    public void setDrugDescription(String drugDescription) {
+        this.drugDescription = drugDescription == null ? null : drugDescription.trim();
+    }
+}

@@ -1,0 +1,14 @@
+package com.his.dao;
+
+import java.util.List;
+
+import com.his.entity.Income;
+
+public interface IIncomeDao {
+
+	/**
+	 * 查询所有收入
+	 * @return
+	 */
+	List<Income> checkIncome();
+}

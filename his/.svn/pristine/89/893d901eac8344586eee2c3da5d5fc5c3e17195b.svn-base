@@ -1,0 +1,13 @@
+package com.his.service;
+
+import com.his.entity.Advice;
+
+public interface AdviceService {
+
+	/**
+	 * 添加医嘱
+	 * @param advice
+	 * @return
+	 */
+	int addAdvice(Advice advice);
+}

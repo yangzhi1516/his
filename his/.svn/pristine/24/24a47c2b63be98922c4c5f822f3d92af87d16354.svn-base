@@ -1,0 +1,55 @@
+package com.his.entity;
+
+import java.math.BigDecimal;
+
+public class Income {
+    private Integer incomeId;
+
+    private BigDecimal incomeRegistration;
+
+    private BigDecimal incomeWork;
+
+    private BigDecimal incomeHospitalization;
+
+    private BigDecimal incomeTotal;
+
+    public Integer getIncomeId() {
+        return incomeId;
+    }
+
+    public void setIncomeId(Integer incomeId) {
+        this.incomeId = incomeId;
+    }
+
+    public BigDecimal getIncomeRegistration() {
+        return incomeRegistration;
+    }
+
+    public void setIncomeRegistration(BigDecimal incomeRegistration) {
+        this.incomeRegistration = incomeRegistration;
+    }
+
+    public BigDecimal getIncomeWork() {
+        return incomeWork;
+    }
+
+    public void setIncomeWork(BigDecimal incomeWork) {
+        this.incomeWork = incomeWork;
+    }
+
+    public BigDecimal getIncomeHospitalization() {
+        return incomeHospitalization;
+    }
+
+    public void setIncomeHospitalization(BigDecimal incomeHospitalization) {
+        this.incomeHospitalization = incomeHospitalization;
+    }
+
+    public BigDecimal getIncomeTotal() {
+        return incomeTotal;
+    }
+
+    public void setIncomeTotal(BigDecimal incomeTotal) {
+        this.incomeTotal = incomeTotal;
+    }
+}

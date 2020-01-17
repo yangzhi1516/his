@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.his.dao.IPrescriptionDao">
+	<!-- 添加药方信息 -->
+	<insert id="addPrescription" parameterType="Prescription">
+		INSERT INTO prescription(prescription_code,prescription_drug_id,prescription_drugnum,
+		prescription_totalprice,prescription_patient_id,prescription_state) 
+		VALUES(#{prescriptionCode},#{prescriptionDrugId},#{prescriptionDrugnum},
+		(SELECT drug_price*#{prescriptionDrugnum} FROM drug WHERE drug_id=#{prescriptionDrugId}),
+		#{prescriptionPatientId},#{prescriptionState})
+	</insert>
+	<!-- 查询所有药方信息 -->
+	<select id="findAllPrescription" resultType="Prescription">
+		SELECT * FROM prescription LEFT JOIN 
+		(SELECT prescription_code,SUM(prescription_totalprice) 
+		AS prescriptionTotalprice  FROM prescription GROUP BY prescription_code) AS a
+		ON prescription.prescription_code=a.prescription_code
+	</select>
+</mapper>

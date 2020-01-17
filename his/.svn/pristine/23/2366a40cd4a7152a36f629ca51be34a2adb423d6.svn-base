@@ -1,0 +1,15 @@
+package com.his.service;
+
+import java.util.List;
+
+import com.his.entity.Registration;
+
+public interface RegistrationService {
+	
+	/**
+	 * 根据挂号编号查询挂号信息
+	 * @param id
+	 * @return
+	 */
+	List<Registration> findRegistrationById(Integer id);
+}

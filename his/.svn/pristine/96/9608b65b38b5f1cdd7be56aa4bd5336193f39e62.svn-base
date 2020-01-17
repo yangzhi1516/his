@@ -1,0 +1,45 @@
+package com.his.entity;
+
+import java.util.Date;
+
+public class Attendance {
+    private Integer attendanceId;
+
+    private Date attendanceCreatedate;
+
+    private Integer attendanceStaffId;
+
+    private Integer attendanceDays;
+
+    public Integer getAttendanceId() {
+        return attendanceId;
+    }
+
+    public void setAttendanceId(Integer attendanceId) {
+        this.attendanceId = attendanceId;
+    }
+
+    public Date getAttendanceCreatedate() {
+        return attendanceCreatedate;
+    }
+
+    public void setAttendanceCreatedate(Date attendanceCreatedate) {
+        this.attendanceCreatedate = attendanceCreatedate;
+    }
+
+    public Integer getAttendanceStaffId() {
+        return attendanceStaffId;
+    }
+
+    public void setAttendanceStaffId(Integer attendanceStaffId) {
+        this.attendanceStaffId = attendanceStaffId;
+    }
+
+    public Integer getAttendanceDays() {
+        return attendanceDays;
+    }
+
+    public void setAttendanceDays(Integer attendanceDays) {
+        this.attendanceDays = attendanceDays;
+    }
+}

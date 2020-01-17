@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.his.dao.INursingDao">
+	<!-- 添加护士护理的信息 -->
+	<insert id="addNursing" parameterType="Nursing">
+		INSERT INTO nursing(nursing_information,nursing_patient_id,nursing_staff_id)
+		VALUES(#{nursingInformation},#{nursingPatientId},#{nursingStaffId})
+	</insert>
+	
+	<resultMap type="Nursing" id="nursMap">
+		<id column="nursing_id" property="nursingId"/>
+		<association property="patient" javaType="Patient" autoMapping="true">
+			<id column="patient_id" property="patientId"/>
+		</association>
+	</resultMap>
+	<!-- 根据护士id查看全部护理内容 -->
+	<select id="findNursingByNursId" resultMap="nursMap" parameterType="int">
+		SELECT * FROM nursing n
+		LEFT JOIN patient p ON n.nursing_patient_id=p.patient_id
+		WHERE nursing_staff_id=#{nursingStaffId}
+	</select>
+
+</mapper>

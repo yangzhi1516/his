@@ -1,0 +1,135 @@
+package com.his.entity;
+
+import java.util.Date;
+
+public class Patient {
+    private Integer patientId;
+
+    private String patientCode;
+
+    private String patientPassword;
+
+    private String patientName;
+
+    private String patientSex;
+
+    private Integer patientAge;
+
+    private String patientTelephone;
+
+    private String patientIdentitycard;
+
+    private Integer patientDepartmentId;
+
+    private Integer patientAdviceId;
+
+    private String patientPrescriptionCode;
+
+    private Integer patientHospitalizationId;
+
+    private Date patientCreatedate;
+
+    public Integer getPatientId() {
+        return patientId;
+    }
+
+    public void setPatientId(Integer patientId) {
+        this.patientId = patientId;
+    }
+
+    public String getPatientCode() {
+        return patientCode;
+    }
+
+    public void setPatientCode(String patientCode) {
+        this.patientCode = patientCode == null ? null : patientCode.trim();
+    }
+
+    public String getPatientPassword() {
+        return patientPassword;
+    }
+
+    public void setPatientPassword(String patientPassword) {
+        this.patientPassword = patientPassword == null ? null : patientPassword.trim();
+    }
+
+    public String getPatientName() {
+        return patientName;
+    }
+
+    public void setPatientName(String patientName) {
+        this.patientName = patientName == null ? null : patientName.trim();
+    }
+
+    public String getPatientSex() {
+        return patientSex;
+    }
+
+    public void setPatientSex(String patientSex) {
+        this.patientSex = patientSex == null ? null : patientSex.trim();
+    }
+
+    public Integer getPatientAge() {
+        return patientAge;
+    }
+
+    public void setPatientAge(Integer patientAge) {
+        this.patientAge = patientAge;
+    }
+
+    public String getPatientTelephone() {
+        return patientTelephone;
+    }
+
+    public void setPatientTelephone(String patientTelephone) {
+        this.patientTelephone = patientTelephone == null ? null : patientTelephone.trim();
+    }
+
+    public String getPatientIdentitycard() {
+        return patientIdentitycard;
+    }
+
+    public void setPatientIdentitycard(String patientIdentitycard) {
+        this.patientIdentitycard = patientIdentitycard == null ? null : patientIdentitycard.trim();
+    }
+
+    public Integer getPatientDepartmentId() {
+        return patientDepartmentId;
+    }
+
+    public void setPatientDepartmentId(Integer patientDepartmentId) {
+        this.patientDepartmentId = patientDepartmentId;
+    }
+
+    public Integer getPatientAdviceId() {
+        return patientAdviceId;
+    }
+
+    public void setPatientAdviceId(Integer patientAdviceId) {
+        this.patientAdviceId = patientAdviceId;
+    }
+
+    public String getPatientPrescriptionCode() {
+        return patientPrescriptionCode;
+    }
+
+    public void setPatientPrescriptionCode(String patientPrescriptionCode) {
+        this.patientPrescriptionCode = patientPrescriptionCode == null ? null : patientPrescriptionCode.trim();
+    }
+
+    public Integer getPatientHospitalizationId() {
+        return patientHospitalizationId;
+    }
+
+    public void setPatientHospitalizationId(Integer patientHospitalizationId) {
+        this.patientHospitalizationId = patientHospitalizationId;
+    }
+
+    public Date getPatientCreatedate() {
+        return patientCreatedate;
+    }
+
+    public void setPatientCreatedate(Date patientCreatedate) {
+        this.patientCreatedate = patientCreatedate;
+    }
+}

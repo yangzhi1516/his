@@ -1,0 +1,14 @@
+package com.his.service;
+
+import java.util.List;
+
+import com.his.entity.Patient;
+
+public interface PatientService {
+
+	/**
+	 * 查找所有病人信息
+	 * @return
+	 */
+	List<Patient> findAllPatient();
+}

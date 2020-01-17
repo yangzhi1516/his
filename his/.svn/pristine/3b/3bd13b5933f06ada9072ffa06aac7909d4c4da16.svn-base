@@ -1,0 +1,55 @@
+package com.his.entity;
+
+import java.util.Date;
+
+public class History {
+    private Integer historyId;
+
+    private String historyInformation;
+
+    private Integer historyPatientId;
+
+    private Integer historyStaffId;
+
+    private Date historyCreatedate;
+
+    public Integer getHistoryId() {
+        return historyId;
+    }
+
+    public void setHistoryId(Integer historyId) {
+        this.historyId = historyId;
+    }
+
+    public String getHistoryInformation() {
+        return historyInformation;
+    }
+
+    public void setHistoryInformation(String historyInformation) {
+        this.historyInformation = historyInformation == null ? null : historyInformation.trim();
+    }
+
+    public Integer getHistoryPatientId() {
+        return historyPatientId;
+    }
+
+    public void setHistoryPatientId(Integer historyPatientId) {
+        this.historyPatientId = historyPatientId;
+    }
+
+    public Integer getHistoryStaffId() {
+        return historyStaffId;
+    }
+
+    public void setHistoryStaffId(Integer historyStaffId) {
+        this.historyStaffId = historyStaffId;
+    }
+
+    public Date getHistoryCreatedate() {
+        return historyCreatedate;
+    }
+
+    public void setHistoryCreatedate(Date historyCreatedate) {
+        this.historyCreatedate = historyCreatedate;
+    }
+}

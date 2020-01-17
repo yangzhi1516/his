@@ -1,0 +1,13 @@
+package com.his.service;
+
+import com.his.entity.Salary;
+
+public interface SalaryService {
+
+	/**
+	 *  添加员工工资情况
+	 * @param salary
+	 * @return
+	 */
+	int addSalary(Salary salary);
+}

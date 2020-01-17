@@ -1,0 +1,106 @@
+package com.his.entity;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Date;
+/**
+ * 	药物表
+ * @author 杨培源
+ *
+ */
+public class Drug implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Integer drugId; //药物编号
+
+    private String drugName;	//药物名称
+
+    private Integer drugNumber;  //药物库存
+
+    private BigDecimal drugPrice;	//药品价格
+
+    private Integer drugManufacturerId;	//药物生产商id
+
+    private Date drugModifydate;	//库存变化时更新
+
+    private Date drugCreatedate;	//记录进药的时间
+
+    private String drugDescription;	//药物描述
+   
+    private Manufacturer manufacturer;	//药物生产商
+    
+	public Manufacturer getManufacturer() {
+		return manufacturer;
+	}
+
+	public void setManufacturer(Manufacturer manufacturer) {
+		this.manufacturer = manufacturer;
+	}
+
+	public Integer getDrugId() {
+        return drugId;
+    }
+
+    public void setDrugId(Integer drugId) {
+        this.drugId = drugId;
+    }
+
+    public String getDrugName() {
+        return drugName;
+    }
+
+    public void setDrugName(String drugName) {
+        this.drugName = drugName == null ? null : drugName.trim();
+    }
+
+    public Integer getDrugNumber() {
+        return drugNumber;
+    }
+
+    public void setDrugNumber(Integer drugNumber) {
+        this.drugNumber = drugNumber;
+    }
+
+    public BigDecimal getDrugPrice() {
+        return drugPrice;
+    }
+
+    public void setDrugPrice(BigDecimal drugPrice) {
+        this.drugPrice = drugPrice;
+    }
+
+    public Integer getDrugManufacturerId() {
+        return drugManufacturerId;
+    }
+
+    public void setDrugManufacturerId(Integer drugManufacturerId) {
+        this.drugManufacturerId = drugManufacturerId;
+    }
+
+    public Date getDrugModifydate() {
+        return drugModifydate;
+    }
+
+    public void setDrugModifydate(Date drugModifydate) {
+        this.drugModifydate = drugModifydate;
+    }
+
+    public Date getDrugCreatedate() {
+        return drugCreatedate;
+    }
+
+    public void setDrugCreatedate(Date drugCreatedate) {
+        this.drugCreatedate = drugCreatedate;
+    }
+
+    public String getDrugDescription() {
+        return drugDescription;
+    }
+
+    public void setDrugDescription(String drugDescription) {
+        this.drugDescription = drugDescription == null ? null : drugDescription.trim();
+    }
+}

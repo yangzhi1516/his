@@ -1,0 +1,43 @@
+package com.his.service;
+
+import java.util.List;
+
+import com.his.entity.Patient;
+
+public interface PatientService {
+
+	/**
+	 * 查找所有病人信息
+	 * @return
+	 */
+	List<Patient> findAllPatient();
+	
+	/**
+	 * 注册
+	 * @param patient
+	 * @return
+	 */
+	int register(Patient patient);
+	
+	
+	/**
+	 * 登录
+	 * @param patient_code
+	 * @param patient_password
+	 * @return
+	 */
+	Patient login(Patient patient);
+	
+	/**
+	 * 根据病人id查看病人信息
+	 * @param id
+	 * @return
+	 */
+	Patient findPatientById(Integer id);
+	
+	/**
+	 * 查询所有住院，未出院的病人
+	 * @return
+	 */
+	List<Patient> findPatientByHoszatstate();
+}
